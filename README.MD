@@ -20,5 +20,5 @@ chmod +x ./install.sh
 ``` 
 or
 ```bash
-deno ./start.ts
+deno ./app/start.ts
 ```
