@@ -1,12 +1,16 @@
 #!/usr/bin/env -S deno --allow-net
-import { success } from './tools/terminal-ui/logger.ts';
-import { question } from './tools/terminal-ui/question.ts';
+import { call_buttler } from './modules/buttler/buttler.ts';
+import { error } from './tools/terminal-ui/logger.ts';
 
 async function Main(): Promise<void> {
 
-  const res = await question('message 1', ['1', '2', '3'], '3')
+  if (Deno.args.length > 1) {
+    console.log(Deno.args)
+    error('Argument input not implemented')
+    return;
+  }
 
-  success(res);
+  await call_buttler();
 
 }
 

@@ -1,4 +1,5 @@
 import * as logger from './logger.ts';
+import { readLine } from './read_line.ts';
 
 export async function question(
   message: string,
@@ -12,7 +13,7 @@ export async function question(
 
   logger.log(txtMessage, level);
 
-  const response = ''; // TODO: implement fn to load from stdIn
+  const response = await readLine();
   
 
   return response || defaultValue;
