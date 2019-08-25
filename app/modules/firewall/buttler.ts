@@ -57,6 +57,8 @@ async function open_port() {
   const cmd =  manager === FirewallManager.iptables ?
     `iptables -A INPUT -p ${prt} –dport ${portNumber} -j ACCEPT`
     : `firewall-cmd --add-port=${portNumber.replace(':', '-')}/${prt} --permanent`
+  
+  warning('Runing script: ' + cmd);
   const res = await bashExecute(cmd);
   console.log(res);
 }
