@@ -1,3 +1,3 @@
 #!/usr/bin/bash
 
-deno app/start.ts "$@"
+deno -A app/start.ts "$@"

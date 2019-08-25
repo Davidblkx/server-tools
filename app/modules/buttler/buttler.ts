@@ -1,12 +1,32 @@
-import { success } from '../../tools/terminal-ui/logger.ts';
-import { showMenu } from '../../tools/terminal-ui/menu.ts';
+import { warning } from '../../tools/terminal-ui/logger.ts';
+import { showEnumMenu } from '../../tools/terminal-ui/menu.ts';
+import { call_buttler_firewall } from '../firewall/buttler.ts';
+
+enum Options {
+  firewall = 0,
+  exit = 99,
+}
 
 export async function call_buttler() {
-  const option = await showMenu([
-    'first run',
-    'change machine settings',
-    'apply configurations (firewall, ssh, password)',
-  ], "Hello, how can I help?")
+  let breakCycle = false;
+  while (!breakCycle) {
+    const option = await showEnumMenu(
+      Options,
+      "Hello, how can I help?",
+      Options.firewall,
+    );
 
-  success('Option selected: ' + option);
+    switch (option) {
+      case Options.exit: {
+        breakCycle = true;
+        break;
+      }
+      case Options.firewall: {
+        await call_buttler_firewall();
+        break;
+      }
+      default: warning('There are no handler for selected option\n');
+    }
+
+  }
 }
